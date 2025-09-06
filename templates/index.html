@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="app-title">🌤️ Weather App</h1>
+
+        <form method="POST" class="search-box">
+            <input type="text" name="city" placeholder="Enter city name..." required>
+            <select name="units">
+                <option value="metric">Celsius (°C)</option>
+                <option value="imperial">Fahrenheit (°F)</option>
+                <option value="standard">Kelvin (K)</option>
+            </select>
+            <button type="submit"><i class="fas fa-search"></i> Get Weather</button>
+        </form>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if weather %}
+        <div class="weather-card">
+            <h2>{{ weather.city }}, {{ weather.country }}</h2>
+            <h3>{{ weather.temp }}° {{ weather.unit }}</h3>
+            <p><i class="fas fa-cloud"></i> {{ weather.description }}</p>
+            <p>💨 Wind: {{ weather.wind }} m/s</p>
+            <p>💧 Humidity: {{ weather.humidity }}%</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
